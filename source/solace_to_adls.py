@@ -24,7 +24,6 @@ if platform.uname().system == 'Windows': os.environ["PYTHONUNBUFFERED"] = "1" # 
 def upload_file_to_directory(topic, payload):
     try:
         file_system_client = service_client.get_file_system_client(file_system="sample_file_system")
-        #directory_client = file_system_client.create_directory(topic)
         print("\n" + f"Getting directory: {topic}")
         directory_client = file_system_client.get_directory_client(topic)
         print('\nDirectory Found')
@@ -35,23 +34,17 @@ def upload_file_to_directory(topic, payload):
 
     try:
         file_client = directory_client.get_file_client("sample.txt")
-        print('\nFile Found')
         file_size = file_client.get_file_properties().size
-        print("\n" + f"Current file size: {file_size}")
         file_client.append_data(data=payload, offset=file_size, length=len(payload))
         print('\nData Appended')
         file_client.flush_data(file_size + len(payload))
-        print("\n" + f"After Append file size: {file_client.get_file_properties().size}")
 
     except:
         file_client = directory_client.create_file("sample.txt")
-        print('\nFile Created')
         file_size = file_client.get_file_properties().size
-        print("\n" + f"Current file size: {file_size}")
         file_client.append_data(data=payload, offset=0, length=len(payload))
         print('\nData Appended')
         file_client.flush_data(len(payload))
-        print("\n" + f"After Append file size: {file_client.get_file_properties().size}")
 
 # establish ADLS connection
 def storeToADLS(topic, msg):
