@@ -23,7 +23,7 @@ if platform.uname().system == 'Windows': os.environ["PYTHONUNBUFFERED"] = "1" # 
 # upload message content to ADLS
 def upload_file_to_directory(topic, payload):
     try:
-        file_system_client = service_client.get_file_system_client(file_system="sherwin-williams")
+        file_system_client = service_client.get_file_system_client(file_system="sample_file_system")
         #directory_client = file_system_client.create_directory(topic)
         print("\n" + f"Getting directory: {topic}")
         directory_client = file_system_client.get_directory_client(topic)
