@@ -30,7 +30,7 @@ Execute the script as follows:
 - `python solace_to_adls.py`
 
 Note: This assumes you have a [local docker](https://solace.com/products/event-broker/software/getting-started/) broker running on localhost
-It also assumes you have a queue named 'adls' on your broker
+    It also assumes you have a queue named 'adls' on your broker
 
 To pass non default parameters, do so via the environment variables   
 - `SOLACE_HOST=<host_name> SOLACE_VPN=<vpn_name> SOLACE_USERNAME=<username> SOLACE_PASSWORD=<password> python <name_of_file>.py`
